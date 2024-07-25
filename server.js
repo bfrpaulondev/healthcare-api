@@ -47,6 +47,11 @@ app.use('/api/doctors', doctorRoutes);
 app.use('/api/beds', bedRoutes);
 app.use('/api/reports', reportRoutes); 
 
+// Redirecionar a rota raiz para a documentação do Swagger
+app.get('/', (req, res) => {
+    res.redirect('/api-docs');
+});
+
 // Error Middleware
 app.use(errorMiddleware);
 
