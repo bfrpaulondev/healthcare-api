@@ -11,7 +11,7 @@ const options = {
         },
         servers: [
             {
-                url: 'http://localhost:5000', // Certifique-se de que está usando "http"
+                url: 'http://localhost:5000',
             },
         ],
         components: {
@@ -35,22 +35,7 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 const setupSwagger = (app) => {
-    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
-        swaggerOptions: {
-            authAction: {
-                JWT: {
-                    name: 'JWT',
-                    schema: {
-                        type: 'apiKey',
-                        in: 'header',
-                        name: 'Authorization',
-                        description: "",
-                    },
-                    value: "Bearer <JWT>"
-                }
-            }
-        }
-    }));
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 };
 
 module.exports = setupSwagger;
