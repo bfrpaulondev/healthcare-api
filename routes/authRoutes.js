@@ -1,4 +1,3 @@
-// routes/authRoutes.js
 const express = require('express');
 const { register, login } = require('../controllers/authController');
 const router = express.Router();
@@ -14,7 +13,7 @@ const router = express.Router();
  * @swagger
  * /api/auth/register:
  *   post:
- *     summary: Registrar um novo usuário
+ *     summary: Registra um novo usuário
  *     tags: [Auth]
  *     requestBody:
  *       required: true
@@ -49,7 +48,7 @@ router.post('/register', register);
  * @swagger
  * /api/auth/login:
  *   post:
- *     summary: Fazer login
+ *     summary: Faz login de um usuário
  *     tags: [Auth]
  *     requestBody:
  *       required: true
@@ -68,6 +67,13 @@ router.post('/register', register);
  *     responses:
  *       200:
  *         description: Login bem-sucedido
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
  *       401:
  *         description: Email ou senha inválidos
  *       500:

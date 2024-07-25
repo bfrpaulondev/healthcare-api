@@ -1,4 +1,3 @@
-// services/emailService.js
 const nodemailer = require('nodemailer');
 const config = require('../config');
 
@@ -10,12 +9,12 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-exports.sendAppointmentNotification = (doctor, patient, date) => {
+exports.sendAppointmentNotification = (recipient, counterpart, date) => {
     const mailOptions = {
         from: config.emailUser,
-        to: doctor.email,
+        to: recipient.email,
         subject: 'Nova Consulta Agendada',
-        text: `Você tem uma nova consulta agendada com ${patient.name} para o dia ${date}.`,
+        text: `Você tem uma nova consulta agendada com ${counterpart.name} para o dia ${date}.`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {

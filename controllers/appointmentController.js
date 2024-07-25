@@ -1,4 +1,3 @@
-// controllers/appointmentController.js
 const Appointment = require('../models/Appointment');
 const emailService = require('../services/emailService');
 
@@ -7,7 +6,10 @@ exports.createAppointment = async (req, res, next) => {
     try {
         const appointment = new Appointment({ patient, doctor, date });
         await appointment.save();
+        // Enviar notificação para o médico
         emailService.sendAppointmentNotification(doctor, patient, date);
+        // Enviar notificação para o paciente
+        emailService.sendAppointmentNotification(patient, doctor, date);
         res.status(201).json(appointment);
     } catch (error) {
         next(error);
